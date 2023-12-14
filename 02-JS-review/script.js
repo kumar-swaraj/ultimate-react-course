@@ -146,7 +146,7 @@ function getBook(id) {
 /* ********************************** */
 /*  DESTRUCTURING */
 /* ********************************** */
-
+/*
 const book = getBook(2);
 book;
 
@@ -167,3 +167,31 @@ console.log(author);
 const [primaryGenre, secondaryGenre] = genres;
 console.log(primaryGenre);
 console.log(secondaryGenre);
+*/
+
+/* ********************************** */
+/*  REST AND SPREAD */
+/* ********************************** */
+/*
+const book = getBook(1);
+
+const {
+  title: bookName,
+  author,
+  pages,
+  publicationDate,
+  genres,
+  hasMovieAdaptation,
+  translations,
+} = book;
+
+const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
+
+console.log(otherGenres);
+
+const newGenres = [...genres, 'epic fantasy'];
+console.log(newGenres);
+
+const newTranslations = { ...translations, hindi: 'ankhudi ka raja' };
+console.log(newTranslations);
+*/
