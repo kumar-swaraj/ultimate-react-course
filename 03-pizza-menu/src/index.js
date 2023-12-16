@@ -73,10 +73,31 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+  // const pizzas = [];
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza
+
+      {pizzas.length > 0 ? (
+        <>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious.
+          </p>
+
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p>We're still working on our menu. Please come back later :)</p>
+      )}
+
+      {/*<Pizza
         name="Pizza Spinaci"
         ingredients="Tomato, mozarella, spinach, and ricotta cheese"
         photoName="pizzas/spinaci.jpg"
@@ -88,23 +109,25 @@ function Menu() {
         photoName="pizzas/funghi.jpg"
         ingredients="Tomato, mozarella, mushrooms, and onion"
         price={12}
-      />
+  />*/}
     </main>
   );
 }
 
-function Pizza(props) {
-  console.log(props);
+function Pizza({ pizzaObj }) {
+  console.log(pizzaObj);
+
+  // if (pizzaObj.soldOut) return null;
 
   return (
-    <div className="pizza">
-      <img src={props.photoName} alt={props.name} />
+    <li className={`pizza ${pizzaObj.soldOut ? 'sold-out' : ''}`}>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price + 3}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.soldOut ? 'SOLD OUT' : pizzaObj.price}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
@@ -120,10 +143,35 @@ function Footer() {
   // if (hour >= openHour && hour < closeHour) alert('currently shop is open');
   // else alert('currently shop is closed');
 
+  // if (new Date().getDay() === 6)
+  //   return (
+  //     <footer className="footer">
+  //       <p>We're happy to welcome you from Sunday to Friday.</p>
+  //     </footer>
+  //   );
+
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()}. We're currently open.
+      {/* React don't render true/false into the DOM */}
+      {isOpen && <Order closeHour={closeHour} openHour={openHour} />}
+      {isOpen || (
+        <p>
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00.
+        </p>
+      )}
     </footer>
+  );
+}
+
+function Order({ closeHour, openHour }) {
+  return (
+    <div className="order">
+      <p>
+        We're open from {openHour}:00 to {closeHour}:00. Come visit us or order
+        online
+      </p>
+      <button className="btn">Order Now</button>
+    </div>
   );
 }
 
