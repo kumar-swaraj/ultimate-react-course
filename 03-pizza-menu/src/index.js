@@ -73,15 +73,21 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
 
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>
+      {pizzas.length > 0 ? (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      ) : (
+        <p>We're still working on our menu. Please come back later :)</p>
+      )}
 
       {/*<Pizza
         name="Pizza Spinaci"
@@ -102,6 +108,8 @@ function Menu() {
 
 function Pizza(props) {
   console.log(props);
+
+  if (props.pizzaObj.soldOut) return null;
 
   return (
     <li className="pizza">
@@ -127,9 +135,27 @@ function Footer() {
   // if (hour >= openHour && hour < closeHour) alert('currently shop is open');
   // else alert('currently shop is closed');
 
+  // if (new Date().getDay() === 6)
+  //   return (
+  //     <footer className="footer">
+  //       <p>We're happy to welcome you from Sunday to Friday.</p>
+  //     </footer>
+  //   );
+
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()}. We're currently open.
+      {/* React don't render true/false into the DOM */}
+      {isOpen && (
+        <div className="order">
+          <p>We're open untill {closeHour}:00. Come visit us or order online</p>
+          <button className="btn">Order Now</button>
+        </div>
+      )}
+      {isOpen || (
+        <p>
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00.
+        </p>
+      )}
     </footer>
   );
 }
