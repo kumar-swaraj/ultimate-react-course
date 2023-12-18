@@ -13,12 +13,21 @@ function App() {
   const [step, setStep] = useState(1);
   // console.log(step, setStep);
 
+  /*const [test, setTest] = useState({ name: 'Jonas' });*/
+
   function handlePrevious() {
     if (step > 1) setStep(step - 1);
   }
 
   function handleNext() {
     if (step < 3) setStep(step + 1);
+
+    /*
+    // BAD PRACTICE
+    // test.name = 'Fred';
+    // CORRECT WAY
+    setTest({ name: 'Fred' });
+    */
   }
 
   return (
