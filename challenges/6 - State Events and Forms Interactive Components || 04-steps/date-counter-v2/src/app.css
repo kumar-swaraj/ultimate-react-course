@@ -1,0 +1,46 @@
+body {
+  font-family: sans-serif;
+
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dateCounter {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.step input[type='range'] {
+  cursor: pointer;
+}
+
+.count {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.count button {
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.count input {
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.resetBtn {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
