@@ -77,10 +77,26 @@ function Form({ onAddItems }) {
 }
 
 function PackingList({ items, onDeleteItem, onToggleItem }) {
+  const [sortBy, setSortBy] = useState('input');
+
+  let sortedItemsList;
+
+  if (sortBy === 'input') sortedItemsList = [...items];
+
+  if (sortBy === 'description')
+    sortedItemsList = [...items].sort((a, b) =>
+      a.description.localeCompare(b.description)
+    );
+
+  if (sortBy === 'packed')
+    sortedItemsList = [...items].sort(
+      (a, b) => Number(a.packed) - Number(b.packed)
+    );
+
   return (
     <div className="list">
       <ul>
-        {items.map((item) => (
+        {sortedItemsList.map((item) => (
           <Item
             key={item.id}
             item={item}
@@ -89,6 +105,14 @@ function PackingList({ items, onDeleteItem, onToggleItem }) {
           />
         ))}
       </ul>
+
+      <div className="actions">
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value="input">sort by input order</option>
+          <option value="description">sort by description</option>
+          <option value="packed">sort by packed status</option>
+        </select>
+      </div>
     </div>
   );
 }
