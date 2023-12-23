@@ -7,16 +7,30 @@ const messages = [
 ];
 
 function App() {
+  // const arr = useState(1);
+  // console.log(arr);
+
   const [step, setStep] = useState(1);
+  // console.log(step, setStep);
+
+  /*const [test, setTest] = useState({ name: 'Jonas' });*/
 
   const [isOpen, setIsOpen] = useState(true);
 
   function handlePrevious() {
     if (step > 1) setStep((s) => s - 1);
+    // always use callback function when updating state based on current value of state --- (s) => s - 1
   }
 
   function handleNext() {
     if (step < 3) setStep((s) => s + 1);
+
+    /*
+    // BAD PRACTICE
+    // test.name = 'Fred';
+    // CORRECT WAY
+    setTest({ name: 'Fred' });
+    */
   }
 
   return (
@@ -37,36 +51,23 @@ function App() {
           </p>
 
           <div className="buttons">
-            <Button
-              textColor="#fff"
-              bgColor="#7950f2"
-              onClickEvent={handlePrevious}
+            <button
+              style={{ backgroundColor: '#7950f2', color: '#fff' }}
+              onClick={handlePrevious}
             >
-              <span>👈</span> Previous
-            </Button>
+              Previous
+            </button>
 
-            <Button
-              textColor="#fff"
-              bgColor="#7950f2"
-              onClickEvent={handleNext}
+            <button
+              style={{ backgroundColor: '#7950f2', color: '#fff' }}
+              onClick={handleNext}
             >
-              Next <span>👉</span>
-            </Button>
+              Next
+            </button>
           </div>
         </div>
       )}
     </>
-  );
-}
-
-function Button({ textColor, bgColor, onClickEvent, children }) {
-  return (
-    <button
-      style={{ backgroundColor: bgColor, color: textColor }}
-      onClick={onClickEvent}
-    >
-      {children}
-    </button>
   );
 }
 
